@@ -1,5 +1,5 @@
 module Simulator
-  MAX_ROUNDS = 1000000 # Rounds are matched pairs - P1 first, then P2 first
+  MAX_ROUNDS = 100000 # Rounds are matched pairs - P1 first, then P2 first
   MIN_ROUNDS = 1000
 
   # http://en.wikipedia.org/wiki/Checking_whether_a_coin_is_fair
@@ -29,14 +29,20 @@ module Simulator
       break if n >= MIN_ROUNDS && margin >= 2*E[n]
     end
   
-    if verbose
-      print "\x08"
+    wins = (results[bot1] >= results[bot2])
+    wins = nil if n >= MAX_ROUNDS
+
+    print "\x08" if verbose
     
-      if results[bot1] >= results[bot2]
-        puts "WINS" 
-      else
-        puts "LOSES"
-      end
+    if wins.nil?
+      puts "UNDECIDED" if verbose
+      nil
+    elsif wins
+      puts "WINS" if verbose
+      bot1
+    else
+      puts "LOSES" if verbose
+      bot2
     end
   end
 end
