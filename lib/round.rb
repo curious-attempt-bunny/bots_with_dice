@@ -55,6 +55,8 @@ class Round
   end
 end
 
+require 'digest/sha1'
+
 class Player
   attr_accessor :hit_points, :accumulated_damage
   def initialize
@@ -80,6 +82,15 @@ class Player
     else
       # puts "#{self.class} Strategy"
       strategy(victim, last_hit)
+    end
+  end
+
+  def self.inherited(subclass)
+    def subclass.digest
+      @digest ||= begin
+        file = ((self.instance_method(:roll?) rescue nil) || self.instance_method(:strategy)).source_location.first
+        Digest::SHA1.hexdigest(File.read(file))
+      end
     end
   end
 end

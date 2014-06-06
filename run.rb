@@ -7,6 +7,6 @@ require './lib/simulator'
 
 require './my_bot'
 
-Opponents.all.each do |opponent|
+(Opponents.all - MyBot).each do |opponent|
   Simulator.play_out(MyBot, opponent)
 end

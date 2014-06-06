@@ -1,9 +1,9 @@
 module Opponents
   def self.all
-    Dir.glob('bots/*.rb').map do |bot|
+    @opponents ||= Dir.glob('bots/*.rb').map do |bot|
       require File.expand_path(bot)
       eval(camelize(File.basename(bot).sub(%r{\.rb$}, '')))
-    end
+    end + [MyBot]
   end
 
   private
