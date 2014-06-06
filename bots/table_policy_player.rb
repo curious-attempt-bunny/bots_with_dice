@@ -4,6 +4,9 @@ class TablePolicyPlayer < Player
   POLICY = Hash.new do |h, k|
     h[k] = Hash.new
   end
+  WIN_RATE = Hash.new do |h, k|
+    h[k] = Hash.new
+  end
 
   def self.setup(file)
     POLICY.clear
@@ -11,6 +14,7 @@ class TablePolicyPlayer < Player
     CSV.foreach(file) do |row|
       their_hp, our_hp, stop_at = row.map(&:strip).map(&:to_i)
       POLICY[their_hp][our_hp] = stop_at
+      WIN_RATE[their_hp][our_hp] = row.last.to_f
     end
   end
 

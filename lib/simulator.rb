@@ -1,5 +1,5 @@
 module Simulator
-  MAX_ROUNDS = 100000 # Rounds are matched pairs - P1 first, then P2 first
+  MAX_ROUNDS = 2000000 # Rounds are matched pairs - P1 first, then P2 first
   MIN_ROUNDS = 1000
 
   # http://en.wikipedia.org/wiki/Checking_whether_a_coin_is_fair
