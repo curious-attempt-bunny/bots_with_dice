@@ -50,5 +50,5 @@ end
 
 ranked_opponents = Opponents.all.sort { |a,b| wins[b].values.select { |x| x == 'Y' }.size <=> wins[a].values.select { |x| x == 'Y' }.size }
 ranked_opponents.each_with_index do |bot, i|
-  puts "#{i+1}: #{bot}, #{' ' * ([25 - bot.name.size, 0].max)} #{ranked_opponents.map { |opponent| wins[bot][opponent] }.join(', ')}"
+  puts "#{i+1 < 10 ? ' ' : ''}#{i+1}: #{bot}, #{' ' * ([25 - bot.name.size, 0].max)} #{ranked_opponents.map { |opponent| wins[bot][opponent] }.join(', ')}"
 end
